@@ -1,0 +1,32 @@
+.kpNavbar
+{
+    background-color: var(--dark-bg-primary);
+}
+.kpNavlink
+{
+    color: var(--dark-text-primary) !important;
+}
+.kpNavlink:hover
+{
+    color: var(--dark-text-primary) !important;
+}
+.kpBrand {
+    width: 15%;
+    color: var(--light-highlight-primary);
+}
+.kpBrand:hover {
+    width: 15%;
+    color: var(--light-highlight-primary);
+}
+
+.kpAvatar {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    padding: 1%;
+    background-color: var(--light-highlight-primary);
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+}

@@ -1,0 +1,36 @@
+.fileListItem
+{
+    border-left: 3px solid var(--light-bg-primary);
+    padding-left: 2%;
+}
+.fileListItem:hover
+{
+    cursor: pointer;
+    border-left: 3px solid var(--light-highlight-primary);
+    background-color: var(--light-bg-secondary);
+}
+.fileListBlock
+{
+    list-style-type: none;
+    font-size: small;
+    max-height: 11%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.fileList
+{
+    cursor: pointer;
+    border: 0.5px solid lightgray;
+    border-radius: 5px;
+}
+.fileListToggleBtn
+{
+    color: var(--light-text-ternary);
+    font-weight: lighter;
+    stroke-width: 1px;
+    /* background-color: var(--light-bg-primary); */
+}
+.fileListToggleBtnRotate{
+    transform: rotate(-200deg);
+    transition: 6s;
+}
