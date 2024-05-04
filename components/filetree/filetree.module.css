@@ -1,5 +1,7 @@
 .fileListItem
 {
+    display: flex;
+    justify-content: space-between !important;
     border-left: 3px solid var(--light-bg-primary);
     padding-left: 2%;
 }

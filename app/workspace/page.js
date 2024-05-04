@@ -6,6 +6,7 @@ import Menubar from '@/components/menubar/menubar';
 import { useEffect, useState } from 'react';
 import Board from '@/components/board/board';
 import { httpGet } from '../_services/httpHandler';
+import ArticleBoard from '@/components/articleboard/articleboard';
 
 
 export default function workflow() {
@@ -26,12 +27,21 @@ export default function workflow() {
     setFolder();
   } , [currentPage])
 
+  let board = null;
+  if(window != "ARTICLE")
+  {
+    board = (<Board page={currentPage} folder={currentFolder}/>)
+  }
+  else
+  {
+    board = (<ArticleBoard page={currentPage} folder={currentFolder}/>)
+  }
   
   return (
     <div className={`row mb-0 p-0 gx-0 h-100`}>      
       <Navbar updateState={updateState} />
       <Menubar currentWindow={window} openPage={openPage}/>
-      <Board page={currentPage} folder={currentFolder}/>
+      {board}
     </div>
   )
 }

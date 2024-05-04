@@ -1,7 +1,7 @@
 /* eslint-disable */
 'use client';
 
-import { ArrowDownCircle, ArrowLeftCircle, ArrowUpCircle, ChevronDown } from 'react-feather';
+import { ArrowDownCircle, ArrowLeftCircle, ArrowUpCircle, ChevronDown, Trash2 } from 'react-feather';
 import styles from './filetree.module.css'
 import { useState } from 'react';
 
@@ -17,13 +17,13 @@ export default function filetree({ listdata, topic, openPage }) {
         for (let index = 1; index < event.currentTarget.childNodes.length; index++) {
             let element = event.currentTarget.childNodes[index]
             let classList = element.getAttribute('class').split(" ")
-            if (classList.includes("d-block")) {
-                element.classList.remove("d-block")
+            if (classList.includes("d-flex")) {
+                element.classList.remove("d-flex")
                 element.classList.add("d-none")
             }
             else {
                 element.classList.remove("d-none")
-                element.classList.add("d-block")
+                element.classList.add("d-flex")
             }
         }
 
@@ -82,8 +82,8 @@ export default function filetree({ listdata, topic, openPage }) {
                 else {
 
                     //console.log("pushing LI path : " + item.path)
-                    return (<li key={item.path} value={item.path} onClick={(e) => { openBoard(e, item.path) }} className={`${styles.fileListItem} d-none my-2 py-2`}>
-                        {item.name}
+                    return (<li key={item.path} value={item.path} onClick={(e) => { openBoard(e, item.path) }} className={`${styles.fileListItem} d-none my-2 py-2 justify-content-between`}>
+                        <span>{item.name}</span> <Trash2 className='me-2' size={16} /> 
                     </li>)
 
                 }
@@ -108,8 +108,8 @@ export default function filetree({ listdata, topic, openPage }) {
                 </ul>)
             }
             else {
-                node = (<li key={item.path} value={item.path} onClick={(e) => { openBoard(e, item.path) }} className={`${styles.fileListItem} my-2 py-2`}>
-                    {item.name}
+                node = (<li key={item.path} value={item.path} onClick={(e) => { openBoard(e, item.path) }} className={`${styles.fileListItem} my-2 py-2 justify-content-between`}>
+                    <span>{item.name}</span> <Trash2 className='me-2' size={16} />
                 </li>)
             }
 

@@ -36,7 +36,7 @@ export default function Menubar({ currentWindow , openPage}) {
 
 
   const PopupWindow = ({ popupState }) => {
-    if (popupState.newArticlePopup) {return (<NewArticlePopup keyName="newArticlePopup" togglePopup={handlePopupClick} />)}
+    if (popupState.newArticlePopup) {return (<NewArticlePopup keyName="newArticlePopup" togglePopup={handlePopupClick} openPage={openPage}/>)}
     if (popupState.openArticlePopup) {return (<OpenArticlePopup keyName="openArticlePopup" togglePopup={handlePopupClick} openPage={openPage} />)}
     if (popupState.newDocumentPopup) {return (<NewDocPopup keyName="newDocumentPopup" togglePopup={handlePopupClick} openPage={openPage}/>)}
     if (popupState.openDocumentPopup) {return (<OpenDocPopup keyName="openDocumentPopup" togglePopup={handlePopupClick} openPage={openPage} />)}
