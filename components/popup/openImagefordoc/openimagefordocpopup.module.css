@@ -1,0 +1,57 @@
+.kpPopup {
+    position: absolute;
+    top: 27%;
+    left: 30%;
+    margin-top: -9%;
+    margin-left: -10%;
+    width: 65%;
+    min-width: 465px !important;
+    max-height: 800px;
+    border: 0.5px solid var(--light-text-ternary);
+    background-color: var(--light-bg-primary2);
+    border-radius: 5px;
+    font-size: smaller;
+    z-index: 1;
+}
+.kpPopupHeader
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: SPACE-BETWEEN;
+    align-items: center;
+    vertical-align: middle;
+}
+.kpPopupTitle
+{
+    font-size: 2em;
+    font-weight: 200;
+}
+.kpPupupGallary
+{
+    border: 1px solid lightgray;
+    min-height: 177px;
+    margin-bottom: 6px;
+    border-radius: 4px;
+    /* max-height: inherit; */
+    max-height: 6%;
+    overflow-y: auto;
+}
+.kpPupupGallaryItem
+{
+    float: left;
+    width: 250px;
+    height: 200px;
+    margin: 9px;
+    border: 1px solid transparent;
+}
+.kpPupupGallaryItem:hover
+{
+    border: 1px solid grey;
+}
+.kpPupupGallaryItemContent
+{
+    object-fit: fill;
+    width: -webkit-fill-available;
+    height: inherit;
+    display: block;
+}

@@ -13,14 +13,13 @@ export default function workflow() {
 
   let [window , updateState] = useState();
   let [currentPage , openPage] = useState("");
-  let [currentFolder , openFolder] = useState();
+  let [currentFolder , openFolder] = useState("");
 
 
   
   const setFolder = async() => 
   {
     openFolder(currentPage.split("/")[0])
-    console.log(currentPage.split("/")[0])
   } 
 
   useEffect(() => {

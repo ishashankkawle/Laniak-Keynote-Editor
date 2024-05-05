@@ -20,6 +20,8 @@ export default function ArticleBoard({ page , folder })
   }
 
   const [popupState, togglePopupState] = useState(obj)
+  const [wordCount, updateWordCount] = useState(0)
+  const [openPath, updateOpenPath] = useState()
   const toastRef = useRef(null)
 
   useEffect(() => {
@@ -35,6 +37,7 @@ export default function ArticleBoard({ page , folder })
     let url = "https://laniak-keynote-api.azurewebsites.net/docs/file?path=" + page
     let data = await httpGet(url)
     document.getElementById('kp-editor').innerText = data 
+    updateOpenPath(page.split("/").slice(1));
     toastRef.current.togglePopupNotificationDisplay("Successfully opened document" , res["POPUP_NOTIFICATION_MAP"]["type"]["SUCCESS"], 10000)
   }
 
@@ -335,6 +338,35 @@ export default function ArticleBoard({ page , folder })
     document.getElementById("kp-editor").innerText = content;
   }
 
+  const actReset = async() =>
+  {
+    document.getElementById("kp-editor").innerText = "";
+  }
+
+
+  const actSave = async () => {
+    if (confirm("Are you sure you want to save update?")) {
+      toastRef.current.togglePopupNotificationDisplay("Saving updates ...", res["POPUP_NOTIFICATION_MAP"]["type"]["LOADING"], 80000)
+      let url = "https://laniak-keynote-api.azurewebsites.net/docs/file"
+      let body = {
+        "filePath": page,
+        "content": document.getElementById("kp-editor").innerText,
+        "commitMessage": "Updaated file : " + page,
+        "authorName": "Shashank Kawle",
+        "authorEmail": "shashank@test.com"
+      }
+      let data = await httpPut(url , body)
+      document.getElementById('kp-editor').innerText = data
+      toastRef.current.togglePopupNotificationDisplay("Successfully updated document", res["POPUP_NOTIFICATION_MAP"]["type"]["SUCCESS"], 10000)
+    }
+  }
+
+
+  const countWords = async() =>
+  {
+    updateWordCount(document.getElementById("kp-editor").innerText.length);
+  }
+
   return (
     <div className="p-3" style={{ width: '85%', height: '100%' }}>
 
@@ -387,21 +419,21 @@ export default function ArticleBoard({ page , folder })
             <td className={`${styles.kpEditorBtnSecDivider}`}>
               <div className={`${styles.kpEditorBtnImg}`}></div>
             </td>
-            <td className={`${styles.kpEditorMenuBtn}`}><RotateCw className={`${styles.kpEditorBtnImg}`} size={16} color='red' /></td>
+            <td className={`${styles.kpEditorMenuBtn}`} onClick={() => actReset()}><RotateCw className={`${styles.kpEditorBtnImg}`} size={16} color='red' /></td>
 
             </tr>
             </tbody>
           </table>
 
           <div className="align-self-center" style={{"cursor" : "pointer"}}>
-            <Save className={`${styles.kpEditorBtnImg}`} size={16} color="#60d01a" />
+            <Save className={`${styles.kpEditorBtnImg}`} size={16} color="#60d01a" onClick={() => actSave()} />
           </div>
         </div>
 
         <div style={{ "borderBottom": "0.5px solid #ededed" }}></div>
 
         {/* <div className={`${styles.kpEditorEditingPassage}`} id="editor" contentEditable > */}
-        <div className={`${styles.kpEditorEditingPassage}`} id="kp-editor" contentEditable suppressContentEditableWarning={true}>
+        <div className={`${styles.kpEditorEditingPassage}`} id="kp-editor" contentEditable suppressContentEditableWarning={true} onKeyUp={countWords}>
           Type something
         </div>
 
@@ -413,7 +445,11 @@ export default function ArticleBoard({ page , folder })
           </div>
 
           <div className={`${styles.kpEditorSupressedText}`}>
-            Count : <span>10</span>
+            {openPath}
+          </div>
+
+          <div className={`${styles.kpEditorSupressedText}`}>
+            Count : <span>{wordCount}</span>
           </div>
         </div>
 

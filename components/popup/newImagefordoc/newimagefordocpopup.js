@@ -1,7 +1,7 @@
 'use client';
 
 import { getBase64, getSelectOptionsList } from '@/app/_services/util';
-import styles from './newimagepopup.module.css'
+import styles from './newimagefordocpopup.module.css'
 import { useEffect, useRef, useState } from 'react';
 import { httpGet, httpPost } from '@/app/_services/httpHandler';
 import res from '@/app/resources';
@@ -9,7 +9,7 @@ import Toast from '@/components/toast/toast';
 
 
 
-export default function NewImagePopup({keyName , togglePopup}) 
+export default function NewImageForDocPopup({keyName , topic , togglePopup}) 
 {
     const toastRef = useRef(null)
 
@@ -17,22 +17,30 @@ export default function NewImagePopup({keyName , togglePopup})
         togglePopup(keyName)
     }
 
-    let handleSubmitClick = async (e) => {
-        toastRef.current.togglePopupNotificationDisplay("Uploading image ..." , res["POPUP_NOTIFICATION_MAP"]["type"]["LOADING"] , 80000)
-        let file = document.getElementById("kp-doc-image-upload-inp").files[0];
-        let filename = document.getElementById("kp-doc-image-upload-inp").files[0].name;
-        file = await getBase64(file)
-        let body = {
-            "filePath" : "_ARTICLES/Assets/" + filename,
-            "authorName" : "Shashank Kawle",
-            "authorEmail" : "shashank@test.com",
-            "commitMessage" : "Updated " + filename + "to _ARTICLES/Assets/" ,
-            "content" : file
+    let handleSubmitClick = async (e) => 
+    {
+        if(topic != "" )
+        {
+            toastRef.current.togglePopupNotificationDisplay("Uploading image ..." , res["POPUP_NOTIFICATION_MAP"]["type"]["LOADING"] , 80000)
+            let file = document.getElementById("kp-doc-image-upload-inp").files[0];
+            let filename = document.getElementById("kp-doc-image-upload-inp").files[0].name;
+            file = await getBase64(file)
+            let body = {
+                "filePath" : "_ASSETS/"+ topic + "/" + filename,
+                "authorName" : "Shashank Kawle",
+                "authorEmail" : "shashank@test.com",
+                "commitMessage" : "Updated " + filename + " to _ASSETS/" + topic ,
+                "content" : file
+            }
+            let url = "https://laniak-keynote-api.azurewebsites.net/docs/blob"
+            await httpPost(url,body)
+            toastRef.current.togglePopupNotificationDisplay("Successfully Uploaded image" , res["POPUP_NOTIFICATION_MAP"]["type"]["SUCCESS"], 10000)
+            togglePopup(keyName)
         }
-        let url = "https://laniak-keynote-api.azurewebsites.net/articles/blob"
-        await httpPost(url,body)
-        toastRef.current.togglePopupNotificationDisplay("Successfully Uploaded image" , res["POPUP_NOTIFICATION_MAP"]["type"]["SUCCESS"], 10000)
-        togglePopup(keyName)
+        else
+        {
+          toastRef.current.togglePopupNotificationDisplay("Please open the page first" , res["POPUP_NOTIFICATION_MAP"]["type"]["WARNING"] , 80000)
+        }
     }
 
     return (

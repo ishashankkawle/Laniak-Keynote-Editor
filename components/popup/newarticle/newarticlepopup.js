@@ -20,7 +20,7 @@ export default function NewArticlePopup({keyName , togglePopup , openPage}) {
   }
 
   let handleSubmitClick = async (e) => {
-    toastRef.current.togglePopupNotificationDisplay("Creating newe document ..." , res["POPUP_NOTIFICATION_MAP"]["type"]["LOADING"] , 80000)
+    toastRef.current.togglePopupNotificationDisplay("Creating new document ..." , res["POPUP_NOTIFICATION_MAP"]["type"]["LOADING"] , 80000)
     
     let name = document.getElementById("kp-new-article-name-inp").value;
     let image = document.getElementById("kp-new-article-img-inp").value;

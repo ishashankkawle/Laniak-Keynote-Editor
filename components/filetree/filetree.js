@@ -29,6 +29,12 @@ export default function filetree({ listdata, topic, openPage }) {
 
     }
 
+    const deleteItem = (e ,item) => 
+    {
+        e.stopPropagation();
+        console.log("Deleting : " +topic + "/" + item)
+    }
+
     let toggleListDisplay = () => {
         let element = document.getElementById("pageTree")
         let toggler = document.getElementById("pageTreeToggler")
@@ -83,7 +89,7 @@ export default function filetree({ listdata, topic, openPage }) {
 
                     //console.log("pushing LI path : " + item.path)
                     return (<li key={item.path} value={item.path} onClick={(e) => { openBoard(e, item.path) }} className={`${styles.fileListItem} d-none my-2 py-2 justify-content-between`}>
-                        <span>{item.name}</span> <Trash2 className='me-2' size={16} /> 
+                        <span>{item.name}</span> <Trash2 className='me-2' size={16} onClick={(e) => { deleteItem(e ,item.path) }}/> 
                     </li>)
 
                 }
@@ -109,7 +115,7 @@ export default function filetree({ listdata, topic, openPage }) {
             }
             else {
                 node = (<li key={item.path} value={item.path} onClick={(e) => { openBoard(e, item.path) }} className={`${styles.fileListItem} my-2 py-2 justify-content-between`}>
-                    <span>{item.name}</span> <Trash2 className='me-2' size={16} />
+                    <span>{item.name}</span> <Trash2 className='me-2' size={16} onClick={(e) => { deleteItem(e ,item.path) }}/>
                 </li>)
             }
 
