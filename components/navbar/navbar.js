@@ -11,7 +11,7 @@ export default function Navbar({ updateState }) {
   return (
     <nav className={`${styles.kpNavbar} navbar navbar-expand-lg `}>
       <div className="container-fluid">
-        <a className={`navbar-brand ${styles.kpBrand}`}>Kenote Builder</a>
+        <a className={`navbar-brand ${styles.kpBrand}`}>Keynote Builder</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>

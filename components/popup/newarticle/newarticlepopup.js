@@ -34,7 +34,7 @@ export default function NewArticlePopup({keyName , togglePopup , openPage}) {
         "authorName" : "Shashank Kawle",
         "authorEmail" : "shashank@test.com"
     }
-    let url = "https://laniak-keynote-api.azurewebsites.net/article"
+    let url = "https://laniak-keynote-api.azurewebsites.net/articles"
     await httpPost(url,body)
     toastRef.current.togglePopupNotificationDisplay("Successfully created new document" , res["POPUP_NOTIFICATION_MAP"]["type"]["SUCCESS"], 10000)
     togglePopup(keyName)

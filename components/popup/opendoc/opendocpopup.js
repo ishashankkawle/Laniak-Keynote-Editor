@@ -5,13 +5,16 @@ import styles from './opendocpopup.module.css'
 import { useRouter } from 'next/navigation';
 import Filetree from '@/components/filetree/filetree';
 import { useEffect, useRef, useState } from 'react';
-import { httpGet } from '@/app/_services/httpHandler';
+import { httpDelete, httpGet } from '@/app/_services/httpHandler';
 import { getSelectOptionsList } from '@/app/_services/util';
+import Toast from '@/components/toast/toast';
+import res from '@/app/resources';
 
 
 
 export default function OpenDocPopup({ keyName, togglePopup, openPage }) {
 
+    const toastRef = useRef(null)
 
     const [topicData, updateTopicData] = useState([]);
     const [listData, updateListData] = useState([]);
@@ -60,6 +63,21 @@ export default function OpenDocPopup({ keyName, togglePopup, openPage }) {
         }
     }
 
+    let deletePage = async (pagePath) => {
+        if(confirm("Are you sure you want to delete page : " + pagePath + " ?"))
+        {
+            toastRef.current.togglePopupNotificationDisplay("Deleting page ..." , res["POPUP_NOTIFICATION_MAP"]["type"]["LOADING"] , 80000)
+            let body = {
+                "filePath" : pagePath,
+                "commitMessage" : "Deleted " + pagePath,
+                "authorEmail" : "shashank@test.com",
+                "authorName" : "Shashank Kawle"
+            }
+            let url = "https://laniak-keynote-api.azurewebsites.net/docs/file"
+            await httpDelete(url,body)
+            toastRef.current.togglePopupNotificationDisplay("Successfully deleted page" , res["POPUP_NOTIFICATION_MAP"]["type"]["SUCCESS"], 10000)
+        }
+    }
 
     let topicList = getSelectOptionsList(topicData , "path" , "name" , true , "Select Topic")
 
@@ -79,10 +97,8 @@ export default function OpenDocPopup({ keyName, togglePopup, openPage }) {
                     {topicList}
                 </select>
             </div>
-            <Filetree listdata={listData} topic={topic} openPage={selectPage} />
-            {/* <div className="input-group mb-3 justify-content-end">
-                <button type="submit" className="btn btn-primary">Send</button>
-            </div> */}
+            <Filetree listdata={listData} topic={topic} openPage={selectPage} removePage={(name) => deletePage(name)} />
+            <Toast ref={toastRef} />
 
         </div>
     )

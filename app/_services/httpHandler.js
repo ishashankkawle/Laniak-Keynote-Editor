@@ -31,7 +31,7 @@ async function httpPut(url, reqBody, customHeaders = getDefaultHeaders()) {
 }
 
 async function httpDelete(url, reqBody, customHeaders = getDefaultHeaders()) {
-    let data = await axios.delete(url, reqBody, { headers: customHeaders}).then(function (response) {
+    let data = await axios.delete(url, {data: reqBody ,  headers: customHeaders }).then(function (response) {
         return response.data;
     });
     return data;

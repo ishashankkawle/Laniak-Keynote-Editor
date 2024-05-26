@@ -5,7 +5,7 @@ import { ArrowDownCircle, ArrowLeftCircle, ArrowUpCircle, ChevronDown, Trash2 } 
 import styles from './filetree.module.css'
 import { useState } from 'react';
 
-export default function filetree({ listdata, topic, openPage }) {
+export default function filetree({ listdata, topic, openPage , removePage }) {
 
     let data = listdata
     let pathArray = []
@@ -32,7 +32,7 @@ export default function filetree({ listdata, topic, openPage }) {
     const deleteItem = (e ,item) => 
     {
         e.stopPropagation();
-        console.log("Deleting : " +topic + "/" + item)
+        removePage(topic + "/" + item)
     }
 
     let toggleListDisplay = () => {
