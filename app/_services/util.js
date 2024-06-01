@@ -206,3 +206,15 @@ export async function getBase64(file)
     });
     return str.split("base64,")[1];
 }
+
+export function hasParentWithId(element, id) {
+    // Traverse up the DOM tree
+    while (element) {
+        // Check if the current element's parent has the specified ID
+        if (element.id === id) {
+            return true;
+        }
+        element = element.parentElement;
+    }
+    return false;
+}

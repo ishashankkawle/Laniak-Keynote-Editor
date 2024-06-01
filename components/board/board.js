@@ -4,7 +4,7 @@ import styles from './board.module.css'
 import { useCallback, useEffect, useRef, useState } from 'react';
 import NewImagePopup from '../popup/newImage/newimagepopup';
 import OpenImagePopup from '../popup/openImage/openimagepopup';
-import { checkParent } from '@/app/_services/util';
+import { checkParent, hasParentWithId } from '@/app/_services/util';
 import { httpGet, httpPut } from '@/app/_services/httpHandler';
 import res from '@/app/resources';
 import Toast from '../toast/toast';
@@ -57,7 +57,7 @@ export default function Board({ page, folder }) {
   }
 
   const actBold = () => {
-    if (window.getSelection().anchorNode.parentElement.id == "kp-editor") {
+    if (hasParentWithId(window.getSelection().anchorNode, "kp-editor")) {
       let str = "**" + window.getSelection().toString() + "**"
       let sel = window.getSelection();
       let range = undefined;
@@ -70,7 +70,7 @@ export default function Board({ page, folder }) {
   }
 
   const actItalic = () => {
-    if (window.getSelection().anchorNode.parentElement.id == "kp-editor") {
+    if (hasParentWithId(window.getSelection().anchorNode, "kp-editor")) {
       let str = "*" + window.getSelection().toString() + "*"
       let sel = window.getSelection();
       let range = undefined;
@@ -83,7 +83,7 @@ export default function Board({ page, folder }) {
   }
 
   const actStrikeThrough = () => {
-    if (window.getSelection().anchorNode.parentElement.id == "kp-editor") {
+    if (hasParentWithId(window.getSelection().anchorNode, "kp-editor")) {
       let str = "~" + window.getSelection().toString() + "~"
       let sel = window.getSelection();
       let range = undefined;
@@ -96,7 +96,7 @@ export default function Board({ page, folder }) {
   }
 
   const actHeader = (level) => {
-    if (window.getSelection().anchorNode.parentElement.id == "kp-editor") {
+    if (hasParentWithId(window.getSelection().anchorNode, "kp-editor")) {
       if (level.target.value != 0) {
         let oldStr = window.getSelection().toString()
         let str = ""
@@ -116,7 +116,7 @@ export default function Board({ page, folder }) {
   }
 
   const actCode = () => {
-    if (window.getSelection().anchorNode.parentElement.id == "kp-editor") {
+    if (hasParentWithId(window.getSelection().anchorNode, "kp-editor")) {
       let str = " `" + window.getSelection().toString() + "` "
       let sel = window.getSelection();
       let range = undefined;
@@ -129,7 +129,7 @@ export default function Board({ page, folder }) {
   }
 
   const actCodeBlock = () => {
-    if (window.getSelection().anchorNode.parentElement.id == "kp-editor") {
+    if (hasParentWithId(window.getSelection().anchorNode, "kp-editor")) {
       let sel = window.getSelection();
       let range = undefined;
       if (sel.rangeCount) {
@@ -144,7 +144,7 @@ export default function Board({ page, folder }) {
   }
 
   const actLine = () => {
-    if (window.getSelection().anchorNode.parentElement.id == "kp-editor") {
+    if (hasParentWithId(window.getSelection().anchorNode, "kp-editor")) {
       let sel = window.getSelection();
       let range = undefined;
       if (sel.rangeCount) {
@@ -158,7 +158,7 @@ export default function Board({ page, folder }) {
   }
 
   const actList = () => {
-    if (window.getSelection().anchorNode.parentElement.id == "kp-editor") {
+    if (hasParentWithId(window.getSelection().anchorNode, "kp-editor")) {
       let str = window.getSelection().toString()
       let list = []
       if (str.includes("\n")) {
@@ -185,7 +185,7 @@ export default function Board({ page, folder }) {
   }
 
   const actBlockQuote = () => {
-    if (window.getSelection().anchorNode.parentElement.id == "kp-editor") {
+    if (hasParentWithId(window.getSelection().anchorNode, "kp-editor")) {
       let str = window.getSelection().toString()
       let list = []
       if (str.includes("\n")) {
@@ -212,7 +212,7 @@ export default function Board({ page, folder }) {
   }
 
   const actLink = () => {
-    if (window.getSelection().anchorNode.parentElement.id == "kp-editor") {
+    if (hasParentWithId(window.getSelection().anchorNode, "kp-editor")) {
       let str = " [<REPLACE : ALT TEXT>](<REPLACE : WEB LINK>) "
       let sel = window.getSelection();
       let range = undefined;
