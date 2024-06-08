@@ -31,7 +31,7 @@ export default function ArticleBoard({ page, folder }) {
 
   const initialize = async () => {
     toastRef.current.togglePopupNotificationDisplay("Opening document ...", res["POPUP_NOTIFICATION_MAP"]["type"]["LOADING"], 80000)
-    let url = "https://laniak-keynote-api.azurewebsites.net/docs/file?path=" + page
+    let url = "https://laniak-keynote-api.azurewebsites.net/articles/file?path=" + page.split("_ARTICLES/")[1]
     let data = await httpGet(url)
     document.getElementById('kp-editor').innerText = data
     updateOpenPath(page.split("/").slice(1));
