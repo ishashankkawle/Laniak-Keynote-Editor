@@ -26,7 +26,7 @@ export default function NewImageForDocPopup({keyName , topic , togglePopup})
             let filename = document.getElementById("kp-doc-image-upload-inp").files[0].name;
             file = await getBase64(file)
             let body = {
-                "filePath" : "_ASSETS/"+ topic + "/" + filename,
+                "filePath" : topic + "/" + filename,
                 "authorName" : "Shashank Kawle",
                 "authorEmail" : "shashank@test.com",
                 "commitMessage" : "Updated " + filename + " to _ASSETS/" + topic ,
