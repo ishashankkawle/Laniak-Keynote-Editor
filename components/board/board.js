@@ -1,5 +1,5 @@
 'use client';
-import { Bold, Box, ChevronsDown, ChevronsUp, Code, CreditCard, Image, Italic, Link, Link2, List, MessageCircle, RotateCw, Save, Underline, UploadCloud } from 'react-feather';
+import { Bold, Box, ChevronsDown, ChevronsUp, Code, CreditCard, Image, Italic, Link, Link2, List, MessageCircle, RotateCw , RefreshCcw, Save, Underline, UploadCloud } from 'react-feather';
 import styles from './board.module.css'
 import { useCallback, useEffect, useRef, useState } from 'react';
 import NewImagePopup from '../popup/newImage/newimagepopup';
@@ -224,11 +224,18 @@ export default function Board({ page, folder }) {
     }
   }
 
-  const actImage = (altText, url) => {
-    let content = document.getElementById("kp-editor").innerText;
-    console.log(content)
-    content = content + "\n ![" + altText + "](" + url + ")"
-    document.getElementById("kp-editor").innerText = content;
+  const actImage = (altText, url) => 
+  {
+    if (hasParentWithId(window.getSelection().anchorNode, "kp-editor")) {
+      let str = "![" + altText + "](" + url + ")"
+      let sel = window.getSelection();
+      let range = undefined;
+      if (sel.rangeCount) {
+        range = sel.getRangeAt(0);
+        range.deleteContents();
+        range.insertNode(document.createTextNode(str));
+      }
+    }
   }
 
   const actReset = async () => {
@@ -250,6 +257,11 @@ export default function Board({ page, folder }) {
       document.getElementById('kp-editor').innerText = data
       toastRef.current.togglePopupNotificationDisplay("Successfully updated document", res["POPUP_NOTIFICATION_MAP"]["type"]["SUCCESS"], 10000)
     }
+  }
+
+  const actReload = async () => {
+    document.getElementById("kp-editor").innerText = "";
+    await initialize();
   }
 
   const countWords = async () => {
@@ -298,6 +310,7 @@ export default function Board({ page, folder }) {
                 <td className={`${styles.kpEditorMenuBtn}`} onClick={() => handlePopupClick("newImagePopup")}><UploadCloud className={`${styles.kpEditorBtnImg}`} size={16} /></td>
                 <td className={`${styles.kpEditorMenuBtn}`} onClick={() => actLink()}><Link2 className={`${styles.kpEditorBtnImg}`} size={16} /></td>
                 <td className={`${styles.kpEditorMenuBtn}`} onClick={() => actBlockQuote()}><MessageCircle className={`${styles.kpEditorBtnImg}`} size={16} /></td>
+                <td className={`${styles.kpEditorMenuBtn}`} onClick={() => actReload()}><RefreshCcw className={`${styles.kpEditorBtnImg}`} size={16} /></td>
                 <td className={`${styles.kpEditorBtnSecDivider}`}>
                   <div className={`${styles.kpEditorBtnImg}`}></div>
                 </td>

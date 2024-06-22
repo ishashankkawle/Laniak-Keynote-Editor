@@ -26,14 +26,14 @@
     font-size: 2em;
     font-weight: 200;
 }
-.kpPupupGallary
+.kpPopupGallary
 {
     border: 1px solid lightgray;
     min-height: 177px;
     margin-bottom: 6px;
     border-radius: 4px;
     /* max-height: inherit; */
-    max-height: 6%;
+    max-height: 300px;
     overflow-y: auto;
 }
 .kpPupupGallaryItem

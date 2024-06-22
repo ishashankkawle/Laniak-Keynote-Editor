@@ -70,7 +70,7 @@ export default function OpenImageForDocPopup({keyName , topic , togglePopup , ad
         <div className="input-group mb-3">
           <input type="text" id='kp-inp-img-alt-text' className="form-control" placeholder="Alt Text" required />
         </div>
-        <div className={`${styles.kpPupupGallary}`}>
+        <div className={`${styles.kpPopupGallary}`}>
             <ul style={{"listStyleType" : "none"}}>
                 {data}
             </ul>
