@@ -23,8 +23,9 @@ export default function OpenImageForDocPopup({keyName , topic , togglePopup , ad
     {
       let url = "https://laniak-keynote-api.azurewebsites.net/docs/contents?path=_ASSETS/" + topic
       let data = await httpGet(url)
-      data = data.map( (item) => {  return (<li key={item.path} className={`${styles.kpPupupGallaryItem}`} onClick={() => handleImageSelection("https://gitlab.com/shashankkawle/DOCS/-/raw/master/"+ item.path)}>
-                                        <Image width={100} height={50} className={`${styles.kpPupupGallaryItemContent} shadow-sm`} src={"https://gitlab.com/shashankkawle/DOCS/-/raw/master/" + item.path} alt={"https://gitlab.com/shashankkawle/DOCS/-/raw/master/" + item.path}/>
+      data = data.map( (item) => {  return (<li key={item.path} className={`${styles.kpPopupGallaryItem}`} onClick={() => handleImageSelection("https://gitlab.com/shashankkawle/DOCS/-/raw/master/"+ item.path)}>
+                                        <Image width={100} height={50} className={`${styles.kpPopupGallaryItemContent} shadow-sm`} src={"https://gitlab.com/shashankkawle/DOCS/-/raw/master/" + item.path} alt={"https://gitlab.com/shashankkawle/DOCS/-/raw/master/" + item.path}/><br/>
+                                        <span className={`${styles.kpPopupGallaryItemName}`}>{item.name}</span>
                                     </li>) })
       await updateListData(data)
     }
