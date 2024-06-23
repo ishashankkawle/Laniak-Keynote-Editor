@@ -56,7 +56,7 @@
 }
 .kpPopupGallaryItemContent
 {
-    object-fit: fill;
+    object-fit: scale-down;
     width: -webkit-fill-available;
     height: 80%;
     display: block;
