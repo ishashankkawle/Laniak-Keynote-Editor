@@ -12,19 +12,34 @@ import ArticleBoard from '@/components/articleboard/articleboard';
 export default function workflow() {
 
   let [window , updateState] = useState();
+  let [userObj , setUser] = useState({});
   let [currentPage , openPage] = useState("");
   let [currentFolder , openFolder] = useState("");
 
 
+  useEffect(() => {
+    initialize();
+  } , [])
+  
+
+  useEffect(() => {
+    setFolder();
+  } , [currentPage])
+  
+  const initialize = async() => 
+  {
+    let resp = await fetch("/api/cookie");
+    resp = await resp.json()
+    resp = JSON.parse(resp.value)
+    setUser(resp)
+  } 
   
   const setFolder = async() => 
   {
     openFolder(currentPage.split("/")[0])
   } 
 
-  useEffect(() => {
-    setFolder();
-  } , [currentPage])
+
 
   let board = null;
   if(window != "ARTICLE")
@@ -36,11 +51,18 @@ export default function workflow() {
     board = (<ArticleBoard page={currentPage} folder={currentFolder}/>)
   }
   
-  return (
-    <div className={`row mb-0 p-0 gx-0 h-100`}>      
-      <Navbar updateState={updateState} />
-      <Menubar currentWindow={window} openPage={openPage}/>
-      {board}
-    </div>
-  )
+  if(userObj.name != undefined)
+  {
+    return (
+      <div className={`row mb-0 p-0 gx-0 h-100`}>      
+        <Navbar updateState={updateState} userData={userObj}/>
+        <Menubar currentWindow={window} openPage={openPage}/>
+        {board}
+      </div>
+    )
+  }
+  else
+  {
+    return null;
+  }
 }

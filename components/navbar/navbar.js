@@ -1,11 +1,21 @@
 
 import styles from './navbar.module.css'
 
-export default function Navbar({ updateState }) {
-
-
+export default function Navbar({ updateState , userData }) {
+  
   const handleClick = (e) => {
     updateState(e)
+  }
+
+  const getInitials = (str) => {
+    let arrStr = str.split(" ")
+    let returnValue = ""
+    if (arrStr.length == "1") {
+        returnValue =  arrStr[0].charAt(0).toUpperCase()
+    } else {
+        returnValue =  arrStr[0].charAt(0).toUpperCase() + arrStr[arrStr.length - 1].charAt(0).toUpperCase()
+    }
+    return returnValue;
   }
 
   return (
@@ -25,7 +35,7 @@ export default function Navbar({ updateState }) {
             </li>
           </ul>
           <form className="d-flex" role="search">
-            <button className={`btn btn-outline-secondary ${styles.kpAvatar}`}>SK</button>
+            <button className={`btn btn-outline-secondary ${styles.kpAvatar}`}>{getInitials(userData.name)}</button>
           </form>
         </div>
       </div>
