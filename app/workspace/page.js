@@ -9,7 +9,7 @@ import { httpGet } from '../_services/httpHandler';
 import ArticleBoard from '@/components/articleboard/articleboard';
 
 
-export default function workflow() {
+export default function Workflow() {
 
   let [window , updateState] = useState();
   let [userObj , setUser] = useState({});
