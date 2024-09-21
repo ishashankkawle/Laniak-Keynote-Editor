@@ -1,10 +1,9 @@
 'use client';
 
-import { AlertCircle } from 'react-feather';
+import { AlertCircle , Image  } from 'react-feather';
 import styles from './openimagefordocpopup.module.css'
 import { useEffect, useRef, useState } from 'react';
 import { httpGet } from '@/app/_services/httpHandler';
-import Image from 'next/image'
 import res from '@/app/resources';
 import Toast from '@/components/toast/toast';
 
@@ -24,8 +23,7 @@ export default function OpenImageForDocPopup({keyName , topic , togglePopup , ad
       let url = "https://laniak-keynote-api.azurewebsites.net/docs/contents?path=_ASSETS/" + topic
       let data = await httpGet(url)
       data = data.map( (item) => {  return (<li key={item.path} className={`${styles.kpPopupGallaryItem}`} onClick={() => handleImageSelection("https://gitlab.com/shashankkawle/DOCS/-/raw/master/"+ item.path)}>
-                                        <Image width={100} height={50} className={`${styles.kpPopupGallaryItemContent} shadow-sm`} src={"https://gitlab.com/shashankkawle/DOCS/-/raw/master/" + item.path} alt={"https://gitlab.com/shashankkawle/DOCS/-/raw/master/" + item.path}/><br/>
-                                        <span className={`${styles.kpPopupGallaryItemName}`}>{item.name}</span>
+                                        <Image size={30} className={`${styles.kpPopupGallaryItemContent} shadow-sm`}/> &nbsp; <span className={`${styles.kpPopupGallaryItemName}`}>{item.name}</span>
                                     </li>) })
       await updateListData(data)
     }
@@ -70,6 +68,9 @@ export default function OpenImageForDocPopup({keyName , topic , togglePopup , ad
         </div>
         <div className="input-group mb-3">
           <input type="text" id='kp-inp-img-alt-text' className="form-control" placeholder="Alt Text" required />
+        </div>
+        <div className='text-smaller text-secondary mb-2'>
+          Selected Image : {selectedImage}
         </div>
         <div className={`${styles.kpPopupGallary}`}>
             <ul style={{"listStyleType" : "none"}}>
