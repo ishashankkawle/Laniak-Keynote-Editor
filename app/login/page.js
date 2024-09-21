@@ -21,6 +21,7 @@ export default function Login() {
 
    const handleLoginPopup = async() => {
        let accountData = await instance.loginPopup(loginRequest).catch((e) => {console.log(e)} ).then((response) => {return response?.account;})
+       console.log(accountData)
        if(accountData != undefined)
         {
           let resp = await fetch("/api/auth" , {method : "POST" , body: JSON.stringify(accountData)});

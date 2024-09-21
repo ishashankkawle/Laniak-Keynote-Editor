@@ -38,13 +38,11 @@
 }
 .kpPopupGallaryItem
 {
-    float: left;
-    width: 250px;
-    height: 200px;
-    margin: 9px;
-    margin-bottom: 20px;
+    width: 95%;
+    margin: 2px;
     border: 1px solid transparent;
-    text-align: center;
+    align-items: center;
+    display: flex;
 }
 .kpPopupGallaryItem:hover
 {
@@ -57,8 +55,6 @@
 .kpPopupGallaryItemContent
 {
     object-fit: scale-down;
-    width: -webkit-fill-available;
-    height: 80%;
     display: block;
     text-align: center;
 }
