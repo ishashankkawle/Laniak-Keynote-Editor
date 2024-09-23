@@ -317,7 +317,7 @@ export default function ArticleBoard({ page, folder }) {
   }
 
   const actImage = (altText, url) => {
-    let str = "<div style=\"text-align: center;\">\n<img style=\"vertical-align: middle;=\" alt=\"" + altText + "\" src=\"" + url + "\"/> \n </div>"
+    let str = "<div style=\"text-align: center;\">\n<img style=\"vertical-align: middle;width: 100%;\" alt=\"" + altText + "\" src=\"" + url + "\"/> \n </div>"
     // document.getElementById("kp-editor").innerText = content;
     let sel = window.getSelection();
     let range = undefined;
