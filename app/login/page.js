@@ -43,7 +43,7 @@ export default function Login() {
            </div>
            <div className="col-md-8">
              <div className="card-body">
-               <h5 className="card-title mb-3">Log In</h5>           
+               <h5 className="card-title mb-3">Welcome to Keynote Editor</h5>           
                <button type="button" className="btn btn-outline-primary mb-3" onClick={handleLoginPopup}>Log In</button>
                <p className='text-x-smaller'><Info color='orange' size={13} /> &nbsp; If you dont have an account, please contact Adminitstrator.</p>
              </div>
