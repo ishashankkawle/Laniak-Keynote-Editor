@@ -226,16 +226,8 @@ export default function Board({ page, folder }) {
 
   const actImage = (altText, url) => 
   {
-    if (hasParentWithId(window.getSelection().anchorNode, "kp-editor")) {
-      let str = "![" + altText + "](" + url + ")"
-      let sel = window.getSelection();
-      let range = undefined;
-      if (sel.rangeCount) {
-        range = sel.getRangeAt(0);
-        range.deleteContents();
-        range.insertNode(document.createTextNode(str));
-      }
-    }
+    let str = "![" + altText + "](" + url + ")"
+    document.getElementById("kp-editor").innerText = document.getElementById("kp-editor").innerText + "\n" + str
   }
 
   const actReset = async () => {

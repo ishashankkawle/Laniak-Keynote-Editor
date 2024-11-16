@@ -3,7 +3,7 @@
 import { AlertCircle , Image } from 'react-feather';
 import styles from './openimagepopup.module.css'
 import { useEffect, useState } from 'react';
-import { httpGet } from '@/app/_services/httpHandler';
+import { httpGet, httpGetV2 } from '@/app/_services/httpHandler';
 // import Image from 'next/image'
 
 
@@ -11,16 +11,23 @@ import { httpGet } from '@/app/_services/httpHandler';
 export default function OpenImagePopup({keyName , togglePopup , addImage}) {
 
 
-  const [data, updateListData] = useState()
+  let [data, updateListData] = useState()
+  let [nextPageLink, updateNextPageLink] = useState(undefined)
   const [selectedImage, updateSelectedImage] = useState()
  
   const initialize = async() => 
   {  
-    let url = "https://laniak-keynote-api.azurewebsites.net/docs/contents?path=_ARTICLES%2FAssets"
-    let data = await httpGet(url)
-    data = data.map( (item) => {  return (<li key={item.path} className={`${styles.kpPopupGallaryItem}`} onClick={() => handleImageSelection("https://gitlab.com/shashankkawle/DOCS/-/raw/master/"+ item.path)}>
-                                        <Image size={30} className={`${styles.kpPopupGallaryItemContent} shadow-sm`}/> &nbsp; <span className={`${styles.kpPopupGallaryItemName}`}>{item.name}</span>
-                                    </li>) })
+    let url = "https://laniak-keynote-api.azurewebsites.net/docs/v2/contents?path=_ARTICLES%2FAssets"
+    let response = await httpGet(url)
+    if(response.nextPage != undefined)
+    {
+      updateNextPageLink(response.nextPage)
+    }
+    else
+    {
+      updateNextPageLink(undefined)
+    }
+    data = createDomElements (response["data"])
     await updateListData(data)
 
   } 
@@ -46,7 +53,34 @@ export default function OpenImagePopup({keyName , togglePopup , addImage}) {
     addImage(document.getElementById("kp-inp-img-alt-text").value , selectedImage)
   }
 
+  let handleLoadMoreClick = async (e) => 
+  {
+    let url = "https://laniak-keynote-api.azurewebsites.net/trigger?url=" + encodeURIComponent(nextPageLink)
+    let response = await httpGet(url)
+    if(response.nextPage != undefined)
+    {
+      updateNextPageLink(response.nextPage)
+    }
+    else
+    {
+      updateNextPageLink(undefined)
+    }
+    let finaldata = data.concat(createDomElements(response.data))
+    await updateListData(finaldata)
+
+  }
   
+  let createDomElements = (arrData) => {
+    return arrData.map( (item) => {  return (<li key={item.path} className={`${styles.kpPopupGallaryItem}`} onClick={() => handleImageSelection("https://gitlab.com/shashankkawle/DOCS/-/raw/master/"+ item.path)}>
+                                        <Image size={30} className={`${styles.kpPopupGallaryItemContent} shadow-sm`}/> &nbsp; <span className={`${styles.kpPopupGallaryItemName}`}>{item.name}</span>
+                                    </li>) })
+  }
+
+  let loadMoreButton = null;
+  if (nextPageLink != undefined) 
+  {
+    loadMoreButton = (<div className={`${styles.kpPopupMoreDataButton} text-bg-secondary`} onClick={handleLoadMoreClick}>Load More</div>)
+  }
 
   return (
     <div className={`${styles.kpPopup} p-3 shadow`}>
@@ -69,6 +103,7 @@ export default function OpenImagePopup({keyName , togglePopup , addImage}) {
                 {data}
             </ul>
         </div>
+        {loadMoreButton}
         <div className="input-group mb-3 justify-content-end">
             <button type="submit" className="btn btn-primary" onClick={handleSubmitClick}>Send</button>
         </div>
