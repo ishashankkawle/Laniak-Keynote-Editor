@@ -234,7 +234,8 @@ export default function Board({ page, folder }) {
   const actImage = (altText, url) => 
   {
     
-    let str = "![" + altText + "](" + url + ")"
+    //let str = "![" + altText + "](" + url + ")"
+    let str = "<img alt=\"" + altText + "\" src=\"" + url + "\"  style=\"margin-left: auto; margin-right: auto; display: block;\" width=\"100%\" height=\"100%\" />"
     
     document.getElementById("kp-editor").innerText = document.getElementById("kp-editor").innerText + "\n" + str
   }
