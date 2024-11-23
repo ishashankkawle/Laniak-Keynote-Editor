@@ -1,5 +1,7 @@
 
 import styles from './navbar.module.css'
+import Image from 'next/image';
+
 
 export default function Navbar({ updateState , userData }) {
   
@@ -21,7 +23,8 @@ export default function Navbar({ updateState , userData }) {
   return (
     <nav className={`${styles.kpNavbar} navbar navbar-expand-lg `}>
       <div className="container-fluid">
-        <a className={`navbar-brand ${styles.kpBrand}`}>Keynote Builder</a>
+        <Image src="/logoEditor.png" className="m-auto img-fluid rounded-start" width={35} height={35} alt="Editor logo" />
+        <a className={`navbar-brand ${styles.kpBrand}`}> &nbsp; Technote Builder</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
