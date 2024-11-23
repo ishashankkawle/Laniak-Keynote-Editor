@@ -5,7 +5,7 @@ export const msalConfig = {
         clientId: "f13a368d-01f2-4e10-a65f-ae938183df8e",
         authority: "https://keynoteauth.b2clogin.com/keynoteauth.onmicrosoft.com/B2C_1_keynote_signin",
         knownAuthorities: ["keynoteauth.b2clogin.com"],
-        redirectUri: "http://localhost:3000/",
+        redirectUri: "https://kneditor.netlify.app/",//"http://localhost:3000/",
         postLogoutRedirectUri: '/', // Indicates the page to navigate after logout.
         navigateToLoginRequestUrl: false, // If "true", will navigate back to the original request location before processing the auth code response.
     },
