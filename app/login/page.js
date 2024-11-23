@@ -36,14 +36,14 @@ export default function Login() {
       {/* <input type='Button' value={"Sign in"} onClick={handleLoginPopup}/> */}
       <UnauthenticatedTemplate>
       <div className={`${styles.loginPanel} d-flex align-items-center`}>
-       <div className={`${styles.loginCard} card mb-3 mx-auto align-middle`}>
+       <div className={`${styles.loginCard} card mx-auto align-middle`}>
          <div className={`${styles.loginCardBlock} row p-2 `}>
            <div className="col-md-4 d-flex justify-content-center">
-             <Image src="/loginauth.png" className="m-auto img-fluid rounded-start" width={150} height={100} alt="..." />
+             <Image src="/logoEditor.png" className="m-auto img-fluid rounded-start" width={150} height={100} alt="..." />
            </div>
            <div className="col-md-8">
              <div className="card-body">
-               <h5 className="card-title mb-3">Welcome to Keynote Editor</h5>           
+               <h5 className="card-title mb-3">Welcome to Technote Editor</h5>           
                <button type="button" className="btn btn-outline-primary mb-3" onClick={handleLoginPopup}>Log In</button>
                <p className='text-x-smaller'><Info color='orange' size={13} /> &nbsp; If you dont have an account, please contact Adminitstrator.</p>
              </div>

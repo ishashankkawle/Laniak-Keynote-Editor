@@ -102,7 +102,7 @@ export default function Board({ page, folder }) {
     }
   }
 
-  const actHeader = (level) => {
+  const actHeader = (level , element) => {
     if (hasParentWithId(window.getSelection().anchorNode, "kp-editor")) {
       if (level.target.value != 0) {
         let oldStr = window.getSelection().toString()
@@ -120,6 +120,7 @@ export default function Board({ page, folder }) {
         }
       }
     }
+    element.selectedIndex = 0;
   }
 
   const actCode = () => {
@@ -287,8 +288,8 @@ export default function Board({ page, folder }) {
                 </td>
 
                 <td className={`${styles.kpEditorMenuBtn}`}>
-                  <select onChange={(e) => actHeader(e)} className='text-smaller' style={{ "padding": "2%" }} >
-                    <option value={0}>Select Header</option>
+                  <select onClick={(e) => actHeader(e , e.currentTarget)} className='text-smaller' style={{ "padding": "2%" }} >
+                    <option>Select Header</option>
                     <option value={1}>Header 1</option>
                     <option value={2}>Header 2</option>
                     <option value={3}>Header 3</option>
